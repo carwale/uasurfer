@@ -162,10 +162,6 @@ notwebkit:
 // 2nd: look for browser-specific instructions (e.g. chrome/34)
 // 3rd: infer from OS (iOS only)
 func (u *UserAgent) evalBrowserVersion(ua string) {
-	// if there is a 'version/#' attribute with numeric version, use it -- except for Chrome since Android vendors sometimes hijack version/#
-	if u.Browser.Name != BrowserChrome && u.Browser.Version.findVersionNumber(ua, "version/") {
-		return
-	}
 
 	switch u.Browser.Name {
 	case BrowserChrome:
