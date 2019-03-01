@@ -206,5 +206,8 @@ func (u *UserAgent) evalBrowserVersion(ua string) {
 
 	case BrowserCocCoc:
 		_ = u.Browser.Version.findVersionNumber(ua, "coc_coc_browser/")
+	
+	case BrowserSamsung:
+		_ = u.Browser.Version.findVersionNumber(ua, "samsungbrowser/")
 	}
 }
