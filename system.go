@@ -4,6 +4,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"fmt"
 )
 
 var (
@@ -253,6 +254,43 @@ func (v *Version) findVersionNumber(s string, m string) bool {
 		return v.parse(s[ind+len(m):])
 	}
 	return false
+}
+
+func (os *OS) getFullName() string {
+	if os.Name == OSWindows {
+		switch os.Version.Major {
+		case 5:
+			switch os.Version.Minor {
+			case 0:
+				return "Windows 2000"
+			case 1:
+			case 2:
+				return "Windows XP"
+			}
+		case 6:
+			switch os.Version.Minor {
+			case 0:
+				return "Windows Vista"
+			case 1:
+				return "Windows 7"
+			case 2:
+				return "Windows 8"
+			case 3:
+				return "Windows 8.1"
+			}
+		case 10:
+			return "Windows 10"
+		}
+	} else {
+		switch os.Version.Major {
+		case 0:
+			return os.Name.String()[2:]
+		default:
+			return fmt.Sprintf("%s %s", os.Name.String()[2:],
+		fmt.Sprintf("%d.%d.%d", os.Version.Major, os.Version.Minor, os.Version.Patch))
+		}
+	}
+	return "Unknown"
 }
 
 // getiOSVersion accepts the platform portion of a UA string and returns
