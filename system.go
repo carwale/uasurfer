@@ -336,6 +336,9 @@ func strToInt(str string) int {
 
 // method to get version name
 func (v *Version) String() string {
+	if(v.Major == 0 && v.Minor == 0 && v.Patch == 0) {
+		return ""
+	}
 	return fmt.Sprintf("%d.%d.%d", v.Major, v.Minor, v.Patch)
 }
 
