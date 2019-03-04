@@ -256,7 +256,17 @@ func (v *Version) findVersionNumber(s string, m string) bool {
 	return false
 }
 
-func (os *OS) getFullName() string {
+// method to get OS name
+func (os *OS) GetName() string {
+	return os.getName()
+}
+
+func (os *OS) getName() string {
+	return os.Name.String()[2:]
+}
+
+// method to get OS name along with version
+func (os *OS) GetFullName() string {
 	if os.Name == OSWindows {
 		switch os.Version.Major {
 		case 5:
@@ -284,13 +294,21 @@ func (os *OS) getFullName() string {
 	} else {
 		switch os.Version.Major {
 		case 0:
-			return os.Name.String()[2:]
+			return os.getName()
 		default:
-			return fmt.Sprintf("%s %s", os.Name.String()[2:],
-		fmt.Sprintf("%d.%d.%d", os.Version.Major, os.Version.Minor, os.Version.Patch))
+			return fmt.Sprintf("%s %s", os.getName(), os.Version.String())
 		}
 	}
 	return "Unknown"
+}
+
+// method to get Platform name
+func (platform *Platform) GetName() string {
+	return platform.getName()
+}
+
+func (platform *Platform) getName() string {
+	return platform.String()[8:]
 }
 
 // getiOSVersion accepts the platform portion of a UA string and returns
@@ -314,6 +332,11 @@ func (o *OS) getiOSVersion(uaPlatformGroup string) {
 func strToInt(str string) int {
 	i, _ := strconv.Atoi(str)
 	return i
+}
+
+// method to get version name
+func (v *Version) String() string {
+	return fmt.Sprintf("%d.%d.%d", v.Major, v.Minor, v.Patch)
 }
 
 // strToVer accepts a string and returns a Version,

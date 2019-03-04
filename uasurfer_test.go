@@ -1084,10 +1084,12 @@ func BenchmarkParseSafariiPad(b *testing.B) {
 		Parse("Mozilla/5.0 (iPad; CPU OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12B440 Safari/600.1.4")
 	}
 }
-func TestBrowserName(t *testing.T) {
+func TestParseUserAgent(t *testing.T) {
 	u := new(UserAgent)
 	ParseUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15",u)
-	fmt.Printf("OS Name      : %s\n", u.OS.Name.String())
-	fmt.Printf("Version      : %s\n", fmt.Sprintf("%d.%d.%d", u.OS.Version.Major, u.OS.Version.Minor, u.OS.Version.Patch))
-	fmt.Printf("OS Full Name : %s\n", u.OS.getFullName())
+	fmt.Printf("OS Name       : %s\n", u.OS.GetFullName())
+	fmt.Printf("Version       : %s\n", u.OS.Version.String())
+	fmt.Printf("Platform Name : %s\n", u.OS.Platform.GetName())
+	fmt.Printf("Browser Name  : %s\n", u.Browser.GetName())
+	fmt.Printf("Browser Ver   : %s\n", u.Browser.Version.String())
 }

@@ -211,3 +211,12 @@ func (u *UserAgent) evalBrowserVersion(ua string) {
 		_ = u.Browser.Version.findVersionNumber(ua, "samsungbrowser/")
 	}
 }
+
+// method to get browser name
+func (browser *Browser) GetName() string {
+	return browser.getName()
+}
+
+func (browser *Browser) getName() string {
+	return browser.Name.String()[7:]
+}
